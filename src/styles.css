@@ -1,0 +1,48 @@
+
+
+*{
+  box-sizing: border-box;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  max-width: 600px;
+}
+
+/* input styling */
+
+#checkBtn{
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+margin: 1rem;
+border: none;
+background-color:salmon;
+}
+
+
+
+
+
+/* output styling */
+#absValue{
+width: 200px;
+border: 2px solid black;
+margin: auto;
+text-align: center;
+padding: 1rem;
+}
+#percentValue{
+  width: 200px;
+  padding: 1rem;
+  border: 2px solid black;
+  margin: auto;
+  text-align: center;
+  }
+  #stockDetail{
+    /* width: 200px; */
+    padding: 1rem;
+    border: 2px solid black;
+    margin: auto;
+
+  }
+

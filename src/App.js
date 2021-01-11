@@ -117,7 +117,7 @@ document.getElementById("percentValue").innerText="No Profit/Loss"
 <input onChange={(e)=>quantity=e.target.value} type="number" min="0" />
 </div>
 <button type="submit" className="checkBtn">Check</button>
-<button type="reset" className="checkBtn">Reset</button>
+
 </form>
          {/* <div><p>Enter Purchasing Price</p>
         <input onChange={(e)=>buyprice=e.target.value} type="number" min="1" id="price"/></div>

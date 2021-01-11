@@ -56,14 +56,15 @@ setFinalOutput(showOutput)
      let nosInitial=Number(initial);
      let nosQuantity=Number(quantity);
 if(initial===undefined){
-document.getElementById("absValue").innerText="To know this,please fill  all above fields."
-document.getElementById("percentValue").innerText="To know this,please fill  all above fields."
+document.getElementById("absValue").innerText="Please fill  all above fields."
+document.getElementById("percentValue").innerText="Please fill  all above fields."
 }else{
     profitOrLoss=parseFloat((nosQuantity* nosPresent)- (nosQuantity* nosInitial)).toFixed(2);
-    console.log(profitOrLoss)
+    console.log(profitOrLoss);
     perProfitOrLoss=parseFloat((profitOrLoss/(nosQuantity* nosInitial)) *100).toFixed(2)
 }
-if(profitOrLoss===0){
+console.log(typeof(profitOrLoss))
+if(Number(profitOrLoss)===0){
   document.getElementById("absValue").innerText="No Profit/Loss"
 document.getElementById("percentValue").innerText="No Profit/Loss"
 
@@ -100,9 +101,10 @@ document.getElementById("percentValue").innerText="No Profit/Loss"
         <option value="NVDA">Nvidia - NVDA</option>
         <option value="AAPL">Apple - AAPL</option>
         <option value="AMZN">Amazon - AMZN</option>
+        <option value="ACIA">Acacia Communications Inc	ACIA</option>
   
         </select>
-        <div><p>Enter Buy Price</p>
+        <div><p>Enter Purchasing Price</p>
         <input onChange={(e)=>buyprice=e.target.value} type="number" id="price"/></div>
         <div><p>Enter Quantity</p>
         <input onChange={(e)=>quantity=e.target.value} type="number" id="quant"/></div>

@@ -40,9 +40,13 @@ padding: 1rem;
   }
   #stockDetail{
     /* width: 200px; */
-    padding: 1rem;
+    /* padding: 1rem; */
     border: 2px solid black;
     margin: auto;
 
+  }
+  ul{
+list-style: none;
+padding-inline-start: 0;
   }
 

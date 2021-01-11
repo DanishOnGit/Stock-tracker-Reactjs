@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./styles.css";
 
-var price,quantity;
+var buyprice,quantity;
+let profitOrLoss,perProfitOrLoss;
 
-var output,stockprice;
+
+var output,currentprice;
 let apiKey="0QVW1DBC4JJ5LAG7";
 
 
@@ -25,18 +27,20 @@ export default function App() {
 
     .then(json=>{
       output=json["Global Quote"];
-      stockprice=output["05. price"];
-      var detailsArray= getDetails();
-     console.log(detailsArray);
-detailsArray.forEach(key=>{
-let showOutput= output[key]
-console.log(showOutput)
-document.getElementById("stockDetail").innerText=showOutput
-})
+      currentprice=output["05. price"];
+     calculator(currentprice,buyprice)
       
-
-    })
-    .catch(err=>{
+var showOutput=<div>
+<ul>
+  <li>Current price:{parseFloat(output["05. price"]).toFixed(2)}</li>
+  <li>High:{parseFloat(output["03. high"]).toFixed(2)}</li>
+<li>Low:{parseFloat(output["04. low"]).toFixed(2)}</li>
+</ul>
+</div>
+setFinalOutput(showOutput)
+    
+ })
+   .catch(err=>{
           console.log(err);
     })
 
@@ -46,16 +50,36 @@ document.getElementById("stockDetail").innerText=showOutput
   function urlHandler(name){
     return "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + name + "&apikey=" + apiKey;
   }
-  function getDetails(){
-return Object.keys(output)
-  }
 
+  function calculator(present,initial){
+     let nosPresent=Number(present);
+     let nosInitial=Number(initial);
+     let nosQuantity=Number(quantity);
+if(initial===undefined){
+document.getElementById("absValue").innerText="To know this,please fill  all above fields."
+document.getElementById("percentValue").innerText="To know this,please fill  all above fields."
+}else{
+    profitOrLoss=parseFloat((nosQuantity* nosPresent)- (nosQuantity* nosInitial)).toFixed(2);
+    console.log(profitOrLoss)
+    perProfitOrLoss=parseFloat((profitOrLoss/(nosQuantity* nosInitial)) *100).toFixed(2)
+}
+if(profitOrLoss===0){
+  document.getElementById("absValue").innerText="No Profit/Loss"
+document.getElementById("percentValue").innerText="No Profit/Loss"
 
+}else if(profitOrLoss>0){
+  document.getElementById("absValue").innerText=`$${profitOrLoss} profit`;
+  document.getElementById("percentValue").innerText=` ${perProfitOrLoss} % profit`
 
+}else if(profitOrLoss<0){
+  document.getElementById("absValue").innerText=`$${Math.abs(profitOrLoss)} loss`;
+  document.getElementById("percentValue").innerText=` ${Math.abs(perProfitOrLoss)} % loss`
 
+}
+ 
+}
 
-
-
+  
 
 
 
@@ -79,7 +103,7 @@ return Object.keys(output)
   
         </select>
         <div><p>Enter Buy Price</p>
-        <input onChange={(e)=>price=e.target.value} type="number" id="price"/></div>
+        <input onChange={(e)=>buyprice=e.target.value} type="number" id="price"/></div>
         <div><p>Enter Quantity</p>
         <input onChange={(e)=>quantity=e.target.value} type="number" id="quant"/></div>
         <button id="checkBtn" onClick={clickHandler}>Check</button>
@@ -88,11 +112,16 @@ return Object.keys(output)
 <section>
 <div>
   <p>Profit/Loss</p>
-  <div id="absValue"></div>
+  <div >
+    <p id="absValue"></p>
+  </div>
   </div>
   <div>
   <p>% Profit/Loss</p>
-  <div id="percentValue"></div>
+  <div>
+    <p id="percentValue" ></p>
+    
+  </div>
   </div>
   <div>
   <p>Stock details</p>
@@ -105,6 +134,13 @@ return Object.keys(output)
 
 
 
-// `Current price:$ ${detailsArray[0]} \n Change: ${detailsArray[1]}`
-
-// output["05. price"],output["09. change"]
+/* <form>
+<div>
+<label>Enter purchase price</label>
+<input type="number" min="0.0001"/>
+</div>
+<div>
+<label>Enter Quantity</label>
+<input type="number" min="0" />
+</div>
+</form> */

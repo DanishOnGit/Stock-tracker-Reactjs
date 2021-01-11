@@ -61,7 +61,7 @@ if(initial===undefined || quantity===undefined){
 document.getElementById("absValue").innerText="Please fill  all above fields."
 document.getElementById("percentValue").innerText="Please fill  all above fields."
 }else{
-    profitOrLoss=(nosQuantity* nosPresent)- (nosQuantity* nosInitial).toFixed(2);
+    profitOrLoss=parseFloat((nosQuantity* nosPresent)- (nosQuantity* nosInitial)).toFixed(2);
     console.log(profitOrLoss);
     perProfitOrLoss=(profitOrLoss/(nosQuantity* nosInitial) *100).toFixed(2)
 }

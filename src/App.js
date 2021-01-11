@@ -107,7 +107,7 @@ document.getElementById("percentValue").innerText="No Profit/Loss"
         <option value="ACIA">Acacia Communications Inc	ACIA</option>
   
         </select>
-        <form onSubmit={clickHandler}>
+        <form method="GET" onSubmit={clickHandler}>
 <div>
 <label className="labels">Enter purchase price</label><br/>
 <input onChange={(e)=>buyprice=e.target.value} type="number" min="0.001" step="0.0001"/>

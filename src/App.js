@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./styles.css";
+import invest from "./undraw.svg"
 
 var buyprice,quantity;
 let profitOrLoss,perProfitOrLoss;
@@ -12,7 +13,8 @@ let apiKey="0QVW1DBC4JJ5LAG7";
 export default function App() {
   const[finalOutput,setFinalOutput]=useState("")
 
-  function clickHandler(){
+  function clickHandler(e){
+    e.preventDefault();
     let stockName=document.getElementById("stockName").value
 
     console.log(stockName)
@@ -55,13 +57,13 @@ setFinalOutput(showOutput)
      let nosPresent=Number(present);
      let nosInitial=Number(initial);
      let nosQuantity=Number(quantity);
-if(initial===undefined){
+if(initial===undefined || quantity===undefined){
 document.getElementById("absValue").innerText="Please fill  all above fields."
 document.getElementById("percentValue").innerText="Please fill  all above fields."
 }else{
-    profitOrLoss=parseFloat((nosQuantity* nosPresent)- (nosQuantity* nosInitial)).toFixed(2);
+    profitOrLoss=(nosQuantity* nosPresent)- (nosQuantity* nosInitial).toFixed(2);
     console.log(profitOrLoss);
-    perProfitOrLoss=parseFloat((profitOrLoss/(nosQuantity* nosInitial)) *100).toFixed(2)
+    perProfitOrLoss=(profitOrLoss/(nosQuantity* nosInitial) *100).toFixed(2)
 }
 console.log(typeof(profitOrLoss))
 if(Number(profitOrLoss)===0){
@@ -88,6 +90,7 @@ document.getElementById("percentValue").innerText="No Profit/Loss"
   return (
     <div className="App">
       <h1>Stock Tracker</h1>
+      <div><img src={invest} alt="chartimage" style={{width:"200px",height:"100px"}} /></div>
 
       <section>
         <p>Select Stock</p>
@@ -104,11 +107,23 @@ document.getElementById("percentValue").innerText="No Profit/Loss"
         <option value="ACIA">Acacia Communications Inc	ACIA</option>
   
         </select>
-        <div><p>Enter Purchasing Price</p>
-        <input onChange={(e)=>buyprice=e.target.value} type="number" id="price"/></div>
+        <form onSubmit={clickHandler}>
+<div>
+<label className="labels">Enter purchase price</label><br/>
+<input onChange={(e)=>buyprice=e.target.value} type="number" min="0.001" step="0.0001"/>
+</div>
+<div>
+<label className="labels">Enter Quantity</label><br/>
+<input onChange={(e)=>quantity=e.target.value} type="number" min="0" />
+</div>
+<button type="submit" className="checkBtn">Check</button>
+<button type="reset" className="checkBtn">Reset</button>
+</form>
+         {/* <div><p>Enter Purchasing Price</p>
+        <input onChange={(e)=>buyprice=e.target.value} type="number" min="1" id="price"/></div>
         <div><p>Enter Quantity</p>
-        <input onChange={(e)=>quantity=e.target.value} type="number" id="quant"/></div>
-        <button id="checkBtn" onClick={clickHandler}>Check</button>
+        <input onChange={(e)=>quantity=e.target.value} type="number" min="1" id="quant"/></div>
+        <button id="checkBtn" onClick={clickHandler}>Check</button>  */}
       </section>
 <hr/>
 <section>
@@ -136,13 +151,3 @@ document.getElementById("percentValue").innerText="No Profit/Loss"
 
 
 
-/* <form>
-<div>
-<label>Enter purchase price</label>
-<input type="number" min="0.0001"/>
-</div>
-<div>
-<label>Enter Quantity</label>
-<input type="number" min="0" />
-</div>
-</form> */

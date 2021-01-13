@@ -32,7 +32,10 @@ export default function App() {
       output=json["Global Quote"];
       currentprice=output["05. price"];
      calculator(currentprice,buyprice)
-      
+    // var xyz=Object.entries(output);
+//     xyz.forEach(([key,value])=>{
+// document.getElementById("stockDetail").innerHTML+=key+": "+ value+'<br/>'
+//     })
 var showOutput=<div>
 <ul>
   <li>Current price:{parseFloat(output["05. price"]).toFixed(2)}</li>
@@ -73,7 +76,7 @@ if(Number(profitOrLoss)===0){
 document.getElementById("percentValue").innerText="No Profit/Loss"
 
 }else if(Number(profitOrLoss)>0){
-  document.getElementById("absValue").innerText=`$${profitOrLoss} profit`;
+  document.getElementById("absValue").innerHTML=`$${profitOrLoss} profit <i class="fas fa-angle-double-up"></i>`;
   document.getElementById("percentValue").innerText=` ${perProfitOrLoss} % profit`
    if(Number(perProfitOrLoss)>50){
      document.getElementById("container").style.backgroundColor="lightgreen"
@@ -83,7 +86,7 @@ document.getElementById("percentValue").innerText="No Profit/Loss"
 
    }
 }else if(Number(profitOrLoss)<0){
-  document.getElementById("absValue").innerText=`$${Math.abs(profitOrLoss)} loss`;
+  document.getElementById("absValue").innerHTML=`$${Math.abs(profitOrLoss)} loss <i class="fas fa-angle-double-down"></i>`;
   document.getElementById("percentValue").innerText=` ${Math.abs(perProfitOrLoss)} % loss`
   if(Number(perProfitOrLoss)<(-50)){
     document.getElementById("container").style.backgroundColor="lightcoral"

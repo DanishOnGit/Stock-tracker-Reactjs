@@ -4,6 +4,7 @@ import invest from "./undraw.svg"
 
 var buyprice,quantity;
 let profitOrLoss,perProfitOrLoss;
+var mainColor="rgba(128, 115, 0, 0.301)";
 
 
 var output,currentprice;
@@ -64,22 +65,36 @@ document.getElementById("percentValue").innerText="Please fill  all above fields
     profitOrLoss=parseFloat((nosQuantity* nosPresent)- (nosQuantity* nosInitial)).toFixed(2);
     console.log(profitOrLoss);
     perProfitOrLoss=(profitOrLoss/(nosQuantity* nosInitial) *100).toFixed(2)
+    console.log(perProfitOrLoss)
 }
 console.log(typeof(profitOrLoss))
 if(Number(profitOrLoss)===0){
   document.getElementById("absValue").innerText="No Profit/Loss"
 document.getElementById("percentValue").innerText="No Profit/Loss"
 
-}else if(profitOrLoss>0){
+}else if(Number(profitOrLoss)>0){
   document.getElementById("absValue").innerText=`$${profitOrLoss} profit`;
   document.getElementById("percentValue").innerText=` ${perProfitOrLoss} % profit`
+   if(Number(perProfitOrLoss)>50){
+     document.getElementById("container").style.backgroundColor="lightgreen"
+   }
+   else{
+    document.getElementById("container").style.backgroundColor=`${mainColor}`
 
-}else if(profitOrLoss<0){
+   }
+}else if(Number(profitOrLoss)<0){
   document.getElementById("absValue").innerText=`$${Math.abs(profitOrLoss)} loss`;
   document.getElementById("percentValue").innerText=` ${Math.abs(perProfitOrLoss)} % loss`
+  if(Number(perProfitOrLoss)<(-50)){
+    document.getElementById("container").style.backgroundColor="lightcoral"
+  }
+  else{
+    document.getElementById("container").style.backgroundColor=`${mainColor}`
+
+  }
 
 }
- 
+
 }
 
   
@@ -88,7 +103,7 @@ document.getElementById("percentValue").innerText="No Profit/Loss"
 
 
   return (
-    <div className="App">
+    <div className="App" id="container">
       <h1>Stock Tracker</h1>
       <div><img src={invest} alt="chartimage" style={{width:"200px",height:"100px"}} /></div>
 

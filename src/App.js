@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import "./styles.css";
 import invest from "./undraw.svg"
 
-var buyprice,quantity;
+let buyprice,quantity;
 let profitOrLoss,perProfitOrLoss;
-var mainColor="rgba(128, 115, 0, 0.301)";
-
-
-var output,currentprice;
+let mainColor="rgba(128, 115, 0, 0.301)";
+let output,currentprice;
 let apiKey="0QVW1DBC4JJ5LAG7";
 
 
@@ -36,7 +34,7 @@ export default function App() {
 //     xyz.forEach(([key,value])=>{
 // document.getElementById("stockDetail").innerHTML+=key+": "+ value+'<br/>'
 //     })
-var showOutput=<div>
+let showOutput=<div>
 <ul>
   <li>Current price:{parseFloat(output["05. price"]).toFixed(2)}</li>
   <li>High:{parseFloat(output["03. high"]).toFixed(2)}</li>
